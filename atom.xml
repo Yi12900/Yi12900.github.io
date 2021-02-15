@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Yi12900.github.io</id>
-    <title>Yis-博客</title>
-    <updated>2021-02-15T08:02:48.468Z</updated>
+    <title>Yis-个人博客</title>
+    <updated>2021-02-15T16:19:06.595Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Yi12900.github.io"/>
     <link rel="self" href="https://Yi12900.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>老板大气，生活健康，身体愉快</subtitle>
     <logo>https://Yi12900.github.io/images/avatar.png</logo>
     <icon>https://Yi12900.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Yis-博客</rights>
+    <rights>All rights reserved 2021, Yis-个人博客</rights>
+    <entry>
+        <title type="html"><![CDATA[MFC：picture控件如何显示mat类型的图片]]></title>
+        <id>https://Yi12900.github.io/post/MFC/</id>
+        <link href="https://Yi12900.github.io/post/MFC/">
+        </link>
+        <updated>2020-05-11T04:23:47.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[关于]]></title>
+        <id>https://Yi12900.github.io/post/about/</id>
+        <link href="https://Yi12900.github.io/post/about/">
+        </link>
+        <updated>2019-01-25T11:09:48.000Z</updated>
+    </entry>
 </feed>
