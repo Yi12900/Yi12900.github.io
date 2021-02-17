@@ -2,22 +2,21 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MFC：picture控件如何显示mat类型的图片 | Yis-个人博客</title>
+<title>Opencv：Findcontours | Yis-个人博客</title>
 <link rel="shortcut icon" href="https://Yi12900.github.io/favicon.ico?v=1613534216056">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Yi12900.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="MFC：picture控件如何显示mat类型的图片 | Yis-个人博客 - Atom Feed" href="https://Yi12900.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Opencv：Findcontours | Yis-个人博客 - Atom Feed" href="https://Yi12900.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="首先，cv::Mat类型是不能直接显示在mfc的picture控件里
-需要一步转换，将Mat转为CImage
-我这里通过函数MattoImage实现
-代码如下：
+    <meta name="description" content="Findcontours的对象最好经过二值化和平滑处理
+我采用了自适应二值化和高斯滤波(效果一般)以及腐蚀
 
-    void MattoImage(Mat&amp; mat, CIma..." />
-    <meta name="keywords" content="" />
+    //自适应二值化
+	adaptiveThreshold(gray_M, gray_M, 255, ADAPTIVE_THR..." />
+    <meta name="keywords" content="opencv" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -79,84 +78,88 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              MFC：picture控件如何显示mat类型的图片
+              Opencv：Findcontours
             </h2>
             <div class="post-info">
               <span>
-                2020-05-11
+                2020-05-25
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
+              
+                <a href="https://Yi12900.github.io/tag/BLqk1e6mi/" class="post-tag">
+                  # opencv
+                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>首先，cv::Mat类型是不能直接显示在mfc的picture控件里<br>
-需要一步转换，将Mat转为CImage<br>
-我这里通过函数MattoImage实现<br>
-代码如下：</p>
-<pre >
-    void MattoImage(Mat&amp; mat, CImage&amp; cImage) 
-{
-
-    //create new CImage
-    int width = mat.cols;
-    int height = mat.rows;
-    int channels = mat.channels();
-
-    cImage.Destroy(); //clear
-    cImage.Create(width,
-	height, //positive: left-bottom-up   or negative: left-top-down
-	8 * channels); //numbers of bits per pixel
-
-    //copy values
-    uchar* ps;
-	uchar* pimg = (uchar*)cImage.GetBits(); //A pointer to the bitmap buffer
-
-	//The pitch is the distance, in bytes. represent the beginning of 
-	// one bitmap line and the beginning of the next bitmap line
-	int step = cImage.GetPitch();
-
-	for (int i = 0; i &lt; height; ++i)
+                <p>Findcontours的对象最好经过二值化和平滑处理<br>
+我采用了自适应二值化和高斯滤波(效果一般)以及腐蚀</p>
+<pre>
+    //自适应二值化
+	adaptiveThreshold(gray_M, gray_M, 255, ADAPTIVE_THRESH_GAUSSIAN_C,THRESH_BINARY, 115, -19);
+	//高斯滤波
+	GaussianBlur(gray_M, gray_M, Size(1, 1), 0, 0);
+	//腐蚀
+	Mat out;
+	Mat element = getStructuringElement(MORPH_RECT, cv::Size(3, 3));
+	erode(gray_M, out, element);
+</pre>
+<p>处理完成后就可以正式开始使用Findcontours了<br>
+首先：</p>
+<pre>
+	vector&lt;vector&lt;Point>> contours;  //定义轮廓
+	vector&lt;Vec4i> hierarchy;  //定义存放轮廓结构变量
+</pre>
+<p>所定义的轮廓的类型为Point，使用了vector</p>
+<pre>
+    findContours(out, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_NONE, Point());
+</pre>
+<p>此时已经可以将结果绘制</p>
+<pre>
+    //绘制轮廓
+	for (int t = 0; t &lt; contours.size(); t++)
 	{
-		ps = (mat.ptr&lt;uchar>(i));
-		for (int j = 0; j &lt; width; ++j)
-		{
-			if (channels == 1) //gray
-			{
-				*(pimg + i * step + j) = ps&#91;j];
-			}
-			else if (channels == 3) //color
-			{
-				for (int k = 0; k &lt; 3; ++k)
-				{
-					*(pimg + i * step + j * 3 + k) = ps&#91;j * 3 + k];
-				}
-			}
-		}
+		drawContours(img, contours, t, Scalar(0, 0, 255), 2, 8);
 	}
-}
 </pre>
-<p>然后就是定义一个CImage占时存放转换后的图片，进行转换</p>
-<pre >
-Mat Oimage;
-CImage image1;
-MattoImage(Oimage, image1);//类型转换
+<p>又或者绘制其最小外接矩形，并将矩形的参数通过fstream写入txt文件</p>
+<pre>
+    //绘制最小外接矩形和中心点
+	vector&lt;Rect> boundRect(contours.size());  //定义外接矩形集合
+	vector&lt;RotatedRect> box(contours.size()); //定义最小外接矩形集合
+	Point2f rect&#91;4];
+
+	ofstream in;
+	in.open("C:\\Users\\Yis\\Desktop\\notepad++\\com.txt", ios::trunc); //ios::trunc表示在打开文件前将文件清空,由于是写入,文件不存在则创建
+
+	for (int i = 0; i &lt; contours.size(); i++)
+	{
+		box&#91;i] = minAreaRect(Mat(contours&#91;i]));  //计算每个轮廓最小外接矩形
+		boundRect&#91;i] = boundingRect(Mat(contours&#91;i]));
+
+		circle(img, Point(box&#91;i].center.x, box&#91;i].center.y), 2, Scalar(0, 255, 0), -1, 8);  //绘制最小外接矩形的中心点
+		box&#91;i].points(rect);  //把最小外接矩形四个端点复制给rect数组
+
+		//rectangle(img, Point(boundRect&#91;i].x, boundRect&#91;i].y), Point(boundRect&#91;i].x + boundRect&#91;i].width, boundRect&#91;i].y + boundRect&#91;i].height), Scalar(0, 255, 0), 2, 8);
+		for (int j = 0; j &lt; 4; j++)
+		{
+			line(img, rect&#91;j], rect&#91;(j + 1) % 4], Scalar(0, 0, 255), 2, 8);  //绘制最小外接矩形每条边
+		}
+
+		//start loadtxt test
+
+		in &lt;&lt; box&#91;i].size.width &lt;&lt; '\t' &lt;&lt; box&#91;i].size.height &lt;&lt; endl;//写入数据
+
+		//end
+	}
+	in.close();//关闭文件
 </pre>
-<p>显示部分如下：</p>
-<pre >
-CRect rect1;
-CWnd* pWnd1 = GetDlgItem(IDC_STATIC_1);//picture控件ID:IDC_STATIC_1
-CDC* pDC1 = pWnd1->GetDC();//获取DC
+<p>运用Findcontours需要注意的地方主要是Point结构和RotatedRect结构</p>
 
-pWnd1->GetClientRect(&amp;rect1); //取得客户区尺寸
-pDC1->SetStretchBltMode(STRETCH_HALFTONE); //保持图片不失真
-image1.Draw(pDC1->m_hDC, rect1); //已控件尺寸大小来绘图
-ReleaseDC(pDC1);//释放DC
-
-image1.Destroy();//释放占时存放转换后图片的CImage</pre>
               </div>
               <div class="toc-container">
                 
@@ -168,9 +171,9 @@ image1.Destroy();//释放占时存放转换后图片的CImage</pre>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://Yi12900.github.io/post/about/">
+            <a href="https://Yi12900.github.io/post/MFC/">
               <h3 class="post-title">
-                关于
+                MFC：picture控件如何显示mat类型的图片
               </h3>
             </a>
           </div>
