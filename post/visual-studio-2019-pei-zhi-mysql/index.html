@@ -2,17 +2,23 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MySQL的安装和配置 | Yis-个人博客</title>
+<title>Visual Studio 2019配置MySQL | Yis-个人博客</title>
 <link rel="shortcut icon" href="https://Yi12900.github.io/favicon.ico?v=1614736438379">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Yi12900.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="MySQL的安装和配置 | Yis-个人博客 - Atom Feed" href="https://Yi12900.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Visual Studio 2019配置MySQL | Yis-个人博客 - Atom Feed" href="https://Yi12900.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="MySQL是一个关系型数据库管理系统，由瑞典MySQL AB 公司开发，属于 Oracle 旗下产品。MySQL 是最流行的关系型数据库管理系统之一，在 WEB 应用方面，MySQL是最好的 RDBMS (Relational Databa..." />
-    <meta name="keywords" content="MySQL" />
+    <meta name="description" content="首先要确定你的mysql是否是64位或是32位，可以通过命令 mysql -V 确认
+
+一，修改解决方案配置平台，更改为对应的32位或者是64位
+
+二，项目属性-VC++目录-修改包含目录、引用目录、库目录
+
+1.包含目录-mysql安装目..." />
+    <meta name="keywords" content="Visual Studio 2019,MySQL" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -74,15 +80,19 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              MySQL的安装和配置
+              Visual Studio 2019配置MySQL
             </h2>
             <div class="post-info">
               <span>
                 2021-03-03
               </span>
               <span>
-                3 min read
+                1 min read
               </span>
+              
+                <a href="https://Yi12900.github.io/tag/iZE6MVDoh/" class="post-tag">
+                  # Visual Studio 2019
+                </a>
               
                 <a href="https://Yi12900.github.io/tag/JFYwLtUMq/" class="post-tag">
                   # MySQL
@@ -92,47 +102,25 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>MySQL是一个关系型数据库管理系统，由瑞典MySQL AB 公司开发，属于 Oracle 旗下产品。MySQL 是最流行的关系型数据库管理系统之一，在 WEB 应用方面，MySQL是最好的 RDBMS (Relational Database Management System，关系数据库管理系统) 应用软件之一。<br>
-MySQL是一种关系型数据库管理系统，关系数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。<br>
-MySQL所使用的 SQL 语言是用于访问数据库的最常用标准化语言。MySQL 软件采用了双授权政策，分为社区版和商业版，由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，一般中小型网站的开发都选择 MySQL 作为网站数据库。</p>
-<ul>
-<li>安装：</li>
-</ul>
-<p>一.下载安装包 MySQL的官网-&gt;https://www.mysql.com/ ，下载MySQL Community也就是免费的社区版，下载非debug版，也就是免安装版，将安装包解压到你希望安装的位置。</p>
-<p>二.以管理员身份打开PowerShell<br>
-1.运用cd命令跳转到MySQL文件内的bin文件内<br>
-2.输入mysqld --install  （注意命令里的mysql&quot;d&quot;） 安装MySQL<br>
-3.初始化MySQL，mysqld --initialize --console  ，等待完成后在最后得到随机秘钥，记住这个秘钥。<br>
-4.启动MySQL服务 net start mysql 等待启动<br>
-5.登录验证 mysql -u root -p  ，输入秘钥 ，如果成功则显示welcome</p>
-<ul>
-<li>配置：</li>
-</ul>
-<p>一.修改密码  alter user 'root'@'localhost'identified by '这里输入你要设置的密码';</p>
-<p>二.验证密码修改 mysql -u root -p</p>
-<p>三.全局变量修改<br>
-1.点击'我的电脑'-&gt;'属性'-&gt;'高级系统设置'-&gt;'环境变量'<br>
-2.新建系统变量，变量名 mysql 变量值为MySQL安装目录 X:......\mysql<br>
-3.将变量添加到系统变量的Path中 -新建- %mysql%\bin<br>
-4.保存</p>
-<p>四.在mysql安装目录下创建一个ini文件<br>
-1.如果没有notepad++就先创建一个txt文件<br>
-2.输入配置信息，我个人配置如下</p>
-<p>[mysqld]<br>
-character-set-server=utf8mb4<br>
-bind-address=0.0.0.0<br>
-port=3306<br>
-default-storage-engine=INNODB<br>
-[mysql]<br>
-default-character-set=utf8mb4<br>
-[client]<br>
-default-character-set=utf8mb4</p>
-<p>其中的port是mysql服务开启的端口，如果端口冲突，可以修改。</p>
-<p>常用命令：<br>
-开启MySQL服务  net start mysql<br>
-关闭MySQL服务  net stop mysql<br>
-登录MySQL数据库  mysql -u root -p<br>
-修改MySQL登录密码  alter user 'root'@'localhost' identified by '此处写密码';</p>
+                <p>首先要确定你的mysql是否是64位或是32位，可以通过命令 <code>mysql -V</code> 确认<br>
+<br><br>
+一，修改解决方案配置平台，更改为对应的32位或者是64位<br>
+<br><br>
+二，项目属性-VC++目录-修改包含目录、引用目录、库目录<br>
+<br><br>
+1.包含目录-mysql安装目录的include文件夹<br>
+<br><br>
+2.引用目录、库目录-mysql安装目录的bin文件夹<br>
+<br><br>
+3.修改 链接器-输入-附加依赖项 添加 libmysql.lib<br>
+<br><br>
+配置完成<br>
+<br><br>
+<br><br>
+Tips！<br>
+MySQL头文件 mysql.h<br>
+使用前添加预处理#pragma comment(lib, &quot;libmysql.lib&quot;)<br>
+并且将libmysql.lib以及libmysql.dll添加到工程文件-debug文件内</p>
 
               </div>
               <div class="toc-container">
@@ -145,9 +133,9 @@ default-character-set=utf8mb4</p>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://Yi12900.github.io/post/about/">
+            <a href="https://Yi12900.github.io/post/mysql-de-an-zhuang-he-pei-zhi/">
               <h3 class="post-title">
-                关于
+                MySQL的安装和配置
               </h3>
             </a>
           </div>
