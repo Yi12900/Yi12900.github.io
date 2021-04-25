@@ -2,22 +2,19 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MFC：picture控件如何显示mat类型的图片 | Yis-个人博客</title>
+<title>Python 语法 | Yis-个人博客</title>
 <link rel="shortcut icon" href="https://Yi12900.github.io/favicon.ico?v=1619362238793">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Yi12900.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="MFC：picture控件如何显示mat类型的图片 | Yis-个人博客 - Atom Feed" href="https://Yi12900.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Python 语法 | Yis-个人博客 - Atom Feed" href="https://Yi12900.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="首先，cv::Mat类型是不能直接显示在mfc的picture控件里
-需要一步转换，将Mat转为CImage
-我这里通过函数MattoImage实现
-代码如下：
-
-    void MattoImage(Mat&amp; mat, CIma..." />
-    <meta name="keywords" content="MFC,C++,opencv" />
+    <meta name="description" content="with
+有一些任务，可能事先需要设置，事后做清理工作。对于这种场景，Python的with语句提供了一种非常方便的处理方式。一个很好的例子是文件处理，你需要获取一个文件句柄，从文件中读取数据，然后关闭文件句柄。
+如果不用with语句，代码..." />
+    <meta name="keywords" content="Python" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -79,104 +76,85 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              MFC：picture控件如何显示mat类型的图片
+              Python 语法
             </h2>
             <div class="post-info">
               <span>
-                2020-05-11
+                2021-04-25
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://Yi12900.github.io/tag/1ZZoAmffH/" class="post-tag">
-                  # MFC
-                </a>
-              
-                <a href="https://Yi12900.github.io/tag/qhkRlfdlY/" class="post-tag">
-                  # C++
-                </a>
-              
-                <a href="https://Yi12900.github.io/tag/BLqk1e6mi/" class="post-tag">
-                  # opencv
+                <a href="https://Yi12900.github.io/tag/LimLd5xAd/" class="post-tag">
+                  # Python
                 </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>首先，cv::Mat类型是不能直接显示在mfc的picture控件里<br>
-需要一步转换，将Mat转为CImage<br>
-我这里通过函数MattoImage实现<br>
-代码如下：</p>
-<pre >
-    void MattoImage(Mat&amp; mat, CImage&amp; cImage) 
-{
+                <h1 id="with">with</h1>
+<p>有一些任务，可能事先需要设置，事后做清理工作。对于这种场景，Python的with语句提供了一种非常方便的处理方式。一个很好的例子是文件处理，你需要获取一个文件句柄，从文件中读取数据，然后关闭文件句柄。<br>
+如果不用with语句，代码如下：</p>
+<pre><code>file = open(&quot;/tmp/foo.txt&quot;)
+data = file.read()
+file.close()
+</code></pre>
+<p>这里有两个问题:</p>
+<p>一是可能忘记关闭文件句柄；<br>
+二是文件读取数据发生异常，没有进行任何处理。</p>
+<p>下面是with版本的代码：</p>
+<pre><code>with open(&quot;/tmp/foo.txt&quot;) as file:
+data = file.read()
+</code></pre>
+<p>紧跟with后面的语句被求值后，返回对象的 <strong>enter</strong>() 方法被调用，这个方法的返回值将被赋值给as后面的变量。</p>
+<p>当with后面的代码块全部被执行完之后，将调用前面返回对象的 <strong>exit</strong>()方法。</p>
+<h1 id="rang函数">rang()函数</h1>
+<p>Python3 range() 返回的是一个可迭代对象（类型是对象）</p>
+<p><strong>range(start, stop[, step])</strong></p>
+<p>参数说明：<br>
+start: 计数从 start 开始。默认是从 0 开始。例如range（5）等价于range（0， 5）;<br>
+stop: 计数到 stop 结束，但不包括 stop。例如：range（0， 5） 是[0, 1, 2, 3, 4]没有5<br>
+step：步长，默认为1。例如：range（0， 5） 等价于 range(0, 5, 1)</p>
+<p>实例</p>
+<pre><code>&gt;&gt;&gt;range(10)        # 从 0 开始到 10
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt; range(1, 11)     # 从 1 开始到 11
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+&gt;&gt;&gt; range(0, 30, 5)  # 步长为 5
+[0, 5, 10, 15, 20, 25]
+&gt;&gt;&gt; range(0, 10, 3)  # 步长为 3
+[0, 3, 6, 9]
+&gt;&gt;&gt; range(0, -10, -1) # 负数
+[0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
+&gt;&gt;&gt; range(0)
+[]
+&gt;&gt;&gt; range(1, 0)
+[]
+</code></pre>
 
-    //create new CImage
-    int width = mat.cols;
-    int height = mat.rows;
-    int channels = mat.channels();
-
-    cImage.Destroy(); //clear
-    cImage.Create(width,
-	height, //positive: left-bottom-up   or negative: left-top-down
-	8 * channels); //numbers of bits per pixel
-
-    //copy values
-    uchar* ps;
-	uchar* pimg = (uchar*)cImage.GetBits(); //A pointer to the bitmap buffer
-
-	//The pitch is the distance, in bytes. represent the beginning of 
-	// one bitmap line and the beginning of the next bitmap line
-	int step = cImage.GetPitch();
-
-	for (int i = 0; i &lt; height; ++i)
-	{
-		ps = (mat.ptr&lt;uchar>(i));
-		for (int j = 0; j &lt; width; ++j)
-		{
-			if (channels == 1) //gray
-			{
-				*(pimg + i * step + j) = ps&#91;j];
-			}
-			else if (channels == 3) //color
-			{
-				for (int k = 0; k &lt; 3; ++k)
-				{
-					*(pimg + i * step + j * 3 + k) = ps&#91;j * 3 + k];
-				}
-			}
-		}
-	}
-}
-</pre>
-<p>然后就是定义一个CImage占时存放转换后的图片，进行转换</p>
-<pre >
-Mat Oimage;
-CImage image1;
-MattoImage(Oimage, image1);//类型转换
-</pre>
-<p>显示部分如下：</p>
-<pre >
-CRect rect1;
-CWnd* pWnd1 = GetDlgItem(IDC_STATIC_1);//picture控件ID:IDC_STATIC_1
-CDC* pDC1 = pWnd1->GetDC();//获取DC
-
-pWnd1->GetClientRect(&amp;rect1); //取得客户区尺寸
-pDC1->SetStretchBltMode(STRETCH_HALFTONE); //保持图片不失真
-image1.Draw(pDC1->m_hDC, rect1); //已控件尺寸大小来绘图
-ReleaseDC(pDC1);//释放DC
-
-image1.Destroy();//释放占时存放转换后图片的CImage</pre>
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li><a href="#with">with</a></li>
+<li><a href="#rang%E5%87%BD%E6%95%B0">rang()函数</a></li>
+</ul>
+
               </div>
             </div>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://Yi12900.github.io/post/shen-jing-wang-luo-lian-xi-ti-mu/">
+              <h3 class="post-title">
+                TensorFlow练习题目
+              </h3>
+            </a>
+          </div>
         
 
         
