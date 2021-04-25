@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Yi12900.github.io</id>
     <title>Yis-个人博客</title>
-    <updated>2021-03-11T14:35:57.758Z</updated>
+    <updated>2021-04-25T13:12:21.848Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Yi12900.github.io"/>
     <link rel="self" href="https://Yi12900.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://Yi12900.github.io/images/avatar.png</logo>
     <icon>https://Yi12900.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Yis-个人博客</rights>
+    <entry>
+        <title type="html"><![CDATA[TensorFlow 2.1 神经网络环境配置]]></title>
+        <id>https://Yi12900.github.io/post/tensorflow-21-shen-jing-wang-luo-huan-jing-pei-zhi/</id>
+        <link href="https://Yi12900.github.io/post/tensorflow-21-shen-jing-wang-luo-huan-jing-pei-zhi/">
+        </link>
+        <updated>2021-04-25T12:58:01.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Visual Studio 2019配置MySQL]]></title>
         <id>https://Yi12900.github.io/post/visual-studio-2019-pei-zhi-mysql/</id>
