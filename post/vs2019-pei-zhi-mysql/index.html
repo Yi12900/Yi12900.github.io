@@ -2,19 +2,21 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Python 语法 | Yis-个人博客</title>
+<title>VS2019配置MySQL | Yis-个人博客</title>
 <link rel="shortcut icon" href="https://Yi12900.github.io/favicon.ico?v=1623063179823">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Yi12900.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Python 语法 | Yis-个人博客 - Atom Feed" href="https://Yi12900.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="VS2019配置MySQL | Yis-个人博客 - Atom Feed" href="https://Yi12900.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="with
-有一些任务，可能事先需要设置，事后做清理工作。对于这种场景，Python的with语句提供了一种非常方便的处理方式。一个很好的例子是文件处理，你需要获取一个文件句柄，从文件中读取数据，然后关闭文件句柄。
-如果不用with语句，代码..." />
-    <meta name="keywords" content="Python" />
+    <meta name="description" content="修改VC++目录中的包含目录到include；引用目录和库目录到lib；
+转到链接器，添加附加库目录至bin文件下。
+配置完成，以下为测试用代码
+#include &lt;stdio.h&gt; 
+#include &lt;stdlib.h..." />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -76,71 +78,101 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Python 语法
+              VS2019配置MySQL
             </h2>
             <div class="post-info">
               <span>
-                2021-04-25
+                2021-06-07
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
-              
-                <a href="https://Yi12900.github.io/tag/LimLd5xAd/" class="post-tag">
-                  # Python
-                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="with">with</h1>
-<p>有一些任务，可能事先需要设置，事后做清理工作。对于这种场景，Python的with语句提供了一种非常方便的处理方式。一个很好的例子是文件处理，你需要获取一个文件句柄，从文件中读取数据，然后关闭文件句柄。<br>
-如果不用with语句，代码如下：</p>
-<pre><code>file = open(&quot;/tmp/foo.txt&quot;)
-data = file.read()
-file.close()
-</code></pre>
-<p>这里有两个问题:</p>
-<p>一是可能忘记关闭文件句柄；<br>
-二是文件读取数据发生异常，没有进行任何处理。</p>
-<p>下面是with版本的代码：</p>
-<pre><code>with open(&quot;/tmp/foo.txt&quot;) as file:
-data = file.read()
-</code></pre>
-<p>紧跟with后面的语句被求值后，返回对象的 <strong>enter</strong>() 方法被调用，这个方法的返回值将被赋值给as后面的变量。</p>
-<p>当with后面的代码块全部被执行完之后，将调用前面返回对象的 <strong>exit</strong>()方法。</p>
-<h1 id="rang函数">rang()函数</h1>
-<p>Python3 range() 返回的是一个可迭代对象（类型是对象）</p>
-<p><strong>range(start, stop[, step])</strong></p>
-<p>参数说明：<br>
-start: 计数从 start 开始。默认是从 0 开始。例如range（5）等价于range（0， 5）;<br>
-stop: 计数到 stop 结束，但不包括 stop。例如：range（0， 5） 是[0, 1, 2, 3, 4]没有5<br>
-step：步长，默认为1。例如：range（0， 5） 等价于 range(0, 5, 1)</p>
-<p>实例</p>
-<pre><code>&gt;&gt;&gt;range(10)        # 从 0 开始到 10
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-&gt;&gt;&gt; range(1, 11)     # 从 1 开始到 11
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-&gt;&gt;&gt; range(0, 30, 5)  # 步长为 5
-[0, 5, 10, 15, 20, 25]
-&gt;&gt;&gt; range(0, 10, 3)  # 步长为 3
-[0, 3, 6, 9]
-&gt;&gt;&gt; range(0, -10, -1) # 负数
-[0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
-&gt;&gt;&gt; range(0)
-[]
-&gt;&gt;&gt; range(1, 0)
-[]
+                <p>修改VC++目录中的包含目录到include；引用目录和库目录到lib；<br>
+转到链接器，添加附加库目录至bin文件下。<br>
+配置完成，以下为测试用代码</p>
+<pre><code>#include &lt;stdio.h&gt; 
+#include &lt;stdlib.h&gt; 
+#include &lt;iostream&gt;
+#include&lt;Windows.h&gt;
+#include&lt;mysql.h&gt;
+
+#pragma comment(lib, &quot;libmysql.lib&quot;)
+
+using namespace std;
+
+int main()
+{
+	MYSQL mysql, * sock; //声明MySQL的句柄 
+
+	const char* host = &quot;127.0.0.1&quot;; //因为是作为本机测试，所以填写的是本地IP 
+	const char* user = &quot;wx_iot&quot;; //这里改为你的用户名，即连接MySQL的用户名 
+	const char* passwd = &quot;yoursecretpassword&quot;; //这里改为你的用户密码 
+
+	const char* db = &quot;wx_iot&quot;; //这里改为你要连接的数据库的名字,一个数据可能有几张表
+
+	unsigned int port = 3306; //这是MySQL的服务器的端口，如果你没有修改过的话就是3306。 
+	const char* unix_socket = NULL; //unix_socket这是unix下的，我在Windows下，所以就把它设置为NULL 
+	unsigned long client_flag = 0; //这个参数一般为0 
+
+	const char* i_query = &quot;select * from metrics&quot;; //查询语句，从那个表中查询,这里后面没有;
+
+	MYSQL_RES* result; //保存结果集的
+	MYSQL_ROW row; //代表的是结果集中的一行 
+				   //my_ulonglong row;
+
+	mysql_init(&amp;mysql); //连接之前必须使用这个函数来初始化 
+
+	mysql_options(&amp;mysql, MYSQL_SET_CHARSET_NAME, &quot;utf8&quot;);
+
+	if ((sock = mysql_real_connect(&amp;mysql, host, user, passwd, db, port, unix_socket, client_flag)) == NULL) //连接MySQL 
+	{
+		printf(&quot;fail to connect mysql!\n&quot;);
+		fprintf(stderr, &quot; %s\n&quot;, mysql_error(&amp;mysql));
+		exit(1);
+	}
+	else
+	{
+		fprintf(stderr, &quot;connected\n&quot;);
+	}
+
+	if (mysql_query(&amp;mysql, i_query) != 0) //如果连接成功，则开始查询 .成功返回0
+	{
+		fprintf(stderr, &quot;fail to query!\n&quot;);
+		exit(1);
+	}
+	else
+	{
+		if ((result = mysql_store_result(&amp;mysql)) == NULL) //保存查询的结果 
+		{
+			fprintf(stderr, &quot;fail to store result!\n&quot;);
+			exit(1);
+		}
+		else
+		{
+			while ((row = mysql_fetch_row(result)) != NULL) //读取结果集中的数据，返回的是下一行。因为保存结果集时，当前的游标在第一行【之前】 
+			{
+				cout &lt;&lt; row[0] &lt;&lt; ' ' &lt;&lt; row[1] &lt;&lt; ' ' &lt;&lt; row[2] &lt;&lt; ' ' &lt;&lt; row[3] &lt;&lt; ' ' &lt;&lt; row[4] &lt;&lt; endl;
+			}
+		}
+
+	}
+	mysql_free_result(result); //释放结果集 
+	mysql_close(sock); //关闭连接 
+	system(&quot;pause&quot;);
+	exit(EXIT_SUCCESS);
+
+	return 0;
+}
 </code></pre>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#with">with</a></li>
-<li><a href="#rang%E5%87%BD%E6%95%B0">rang()函数</a></li>
-</ul>
-
+                
               </div>
             </div>
           </article>
@@ -149,9 +181,9 @@ step：步长，默认为1。例如：range（0， 5） 等价于 range(0, 5, 1)
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://Yi12900.github.io/post/shen-jing-wang-luo-lian-xi-ti-mu/">
+            <a href="https://Yi12900.github.io/post/python-with-yu-fa/">
               <h3 class="post-title">
-                TensorFlow练习题目
+                Python 语法
               </h3>
             </a>
           </div>
