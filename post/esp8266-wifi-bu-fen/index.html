@@ -2,20 +2,21 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Yis-个人博客</title>
+<title>ESP8266-WIFI部分 | Yis-个人博客</title>
 <link rel="shortcut icon" href="https://Yi12900.github.io/favicon.ico?v=1648991300527">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Yi12900.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Yis-个人博客 - Atom Feed" href="https://Yi12900.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="ESP8266-WIFI部分 | Yis-个人博客 - Atom Feed" href="https://Yi12900.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="&gt; 欢迎来到我的博客呀，很高兴遇见你！🤝
-关于本站
-Yis的个人网站
-基于Gridea并部署在Github,由于是没有配置cdn，所以没有太多的图片
-原网站因备案问题停掉了，之所以部署在Github也是因为没时间管理索性就这样了，虽..." />
+    <meta name="description" content="1，WIFI库函数——WiFi.mode(val);
+val：此参数允许使用以下值。
+– WIFI_OFF，（关闭WiFi）
+– ​WIFI_STA，（无线终端模式）
+– WIFI_AP, （接入点模式）
+– WIFI_AP_STA，（接入..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -78,11 +79,11 @@ Yis的个人网站
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              ESP8266-WIFI部分
             </h2>
             <div class="post-info">
               <span>
-                2020-05-25
+                2021-10-23
               </span>
               <span>
                 1 min read
@@ -92,26 +93,23 @@ Yis的个人网站
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p><img src="https://Yi12900.github.io/post-images/1613405137252.jpg" alt="" loading="lazy">&gt; 欢迎来到我的博客呀，很高兴遇见你！🤝</p>
-<h2 id="关于本站">关于本站</h2>
-<p>Yis的个人网站</p>
-<p>基于Gridea并部署在Github,由于是没有配置cdn，所以没有太多的图片</p>
-<p>原网站因备案问题停掉了，之所以部署在Github也是因为没时间管理索性就这样了，虽然国内访问慢一点，等以后有机会部署在coding上，这样国内访问会快一点，还有因为数据库备份没了😥，所以文章少了很多，以后再慢慢加吧。</p>
-<h2 id="如何联系">如何联系</h2>
-<p>邮箱：yi12900@qq.com</p>
-<p>B站：https://space.bilibili.com/11233724/</p>
+                <p>1，WIFI库函数——WiFi.mode(val);</p>
+<p>val：此参数允许使用以下值。<br>
+– WIFI_OFF，（关闭WiFi）<br>
+– ​WIFI_STA，（无线终端模式）<br>
+– WIFI_AP, （接入点模式）<br>
+– WIFI_AP_STA，（接入点-无线终端双模式）<br>
+举例来说，如果我们使用WiFi.mode(WIFI_STA)，则意味着我们让ESP8266以无线终端模式进行工作。<br>
+此函数的返回值为布尔型。当ESP8266成功设置为指定模式后，将会返回true，否则返回false。</p>
+<p>2，HTTP请求字符串结构<br>
+String httpRequest = String(&quot;GET /&quot;) + &quot; HTTP/1.1\r\n&quot; +//强制转换<br>
+&quot;Host: &quot; + host + &quot;\r\n&quot; +//host为要请求的网址<br>
+&quot;Connection: close\r\n&quot; +//请求后让服务器关闭连接<br>
+&quot;\r\n&quot;;//\r\n的作用为告诉目标服务器命令换行</p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">关于本站</a></li>
-<li><a href="#%E5%A6%82%E4%BD%95%E8%81%94%E7%B3%BB">如何联系</a></li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
@@ -120,9 +118,9 @@ Yis的个人网站
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://Yi12900.github.io/post/opencv-findcontours/">
+            <a href="https://Yi12900.github.io/post/vs2019-pei-zhi-mysql/">
               <h3 class="post-title">
-                Opencv：Findcontours
+                VS2019配置MySQL并进行测试
               </h3>
             </a>
           </div>

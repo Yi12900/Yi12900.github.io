@@ -2,14 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Yi12900.github.io</id>
     <title>Yis-个人博客</title>
-    <updated>2021-06-07T11:02:44.624Z</updated>
+    <updated>2022-04-03T13:08:31.402Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Yi12900.github.io"/>
     <link rel="self" href="https://Yi12900.github.io/atom.xml"/>
     <subtitle>老板大气，生活健康，身体愉快</subtitle>
     <logo>https://Yi12900.github.io/images/avatar.png</logo>
     <icon>https://Yi12900.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Yis-个人博客</rights>
+    <rights>All rights reserved 2022, Yis-个人博客</rights>
+    <entry>
+        <title type="html"><![CDATA[ESP8266-WIFI部分]]></title>
+        <id>https://Yi12900.github.io/post/esp8266-wifi-bu-fen/</id>
+        <link href="https://Yi12900.github.io/post/esp8266-wifi-bu-fen/">
+        </link>
+        <updated>2021-10-23T10:41:57.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[VS2019配置MySQL并进行测试]]></title>
         <id>https://Yi12900.github.io/post/vs2019-pei-zhi-mysql/</id>
